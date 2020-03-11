@@ -8,7 +8,7 @@ class MyRobot(wpilib.timedRobot,self):
         self.fR = wpilib.PWMTalonFX(1)
         self.bL = wpilib.PWMTalonFX(2)
         self.bR = wpilib.PWMTalonFX(3)
-        self.fLE = wpilib.analogEncoder(0)
+        
         #shooter define
         self.wheelL = wpilib.PWMVictorSPX(4)
         self.wheelR = wpilib.PWMVictorSPX(5)
@@ -18,7 +18,7 @@ class MyRobot(wpilib.timedRobot,self):
         self.liftUp = wpilib.PWMVictorSPX(7)
         self.liftDown = wpilib.PWMVictorSPX(8)
         
-                self.driverXbox = wpilib.XboxControler(0)
+                self.driverXbox = wpilib.XboxController(0)
         
         self.dXL = 1
         self.dYL = 2
@@ -26,7 +26,7 @@ class MyRobot(wpilib.timedRobot,self):
         self.dYR = 5
         self.dTrig = 3
         
-        self.operatorXbox = wpilib.XboxControler(1)
+        self.operatorXbox = wpilib.XboxController(1)
         
         self.oXL = 1
         self.oYL = 2
@@ -36,31 +36,32 @@ class MyRobot(wpilib.timedRobot,self):
         
     def autounomousInit(self):
         
-        for self.fLE.get()< 5:
-            self.fL.
+        pass
         
         
     def teleopPeriodic(self):
         
         #shoot
-        self.wheelL.set(self.operatorXbox.getRawAxis(self.oTrig)+self.operatorXbox.getRawAxis(self.oXR))
-        self.wheelR.set(self.operatorXbox.getRawAxis(self.oTrig)-self.operatorXbox.getRawAxis(self.oXR))
+        self.wheelL.set(self.operatorXbox.getRawAxis(3)+self.operatorXbox.getRawAxis(1))
+        self.wheelR.set(self.operatorXbox.getRawAxis(3)-self.operatorXbox.getRawAxis(1))
         
-        self.conveyor.set(self.operatorXbox.getRawAxis(self.oYL))
+        self.conveyor.set(self.operatorXbox.getRawAxis(6))
         
-        #lift
-    if self.operatorXbox.bumper(left) = true :
-        self.liftUp.set(self.operatorXbox.getRawAxis(self.oYR))
+
     
-    if self.operatorXbox.bumper(right) = true : 
-        self.liftDown.set(self.operatorXbox.getRawAxis(self.oYR))
+#lift
+    if self.operatorXbox.getRawButton(5)== True :
+        self.liftUp.set(self.operatorXbox.getRawAxis(5))
     
-    self.fL.set((self.driverXbox.getRawAxis(dYL))+(2*(self.driverXbox.getRawAxis(self.dXL)))
-    self.fR.set((self.driverXbox.getRawAxis(dYL))-(2*(self.driverXbox.getRawAxis(self.dXL)))
+    if self.operatorXbox.getRawButton(6) ==  True : 
+        self.liftDown.set(self.operatorXbox.getRawAxis(5))
     
-    self.bL.set((self.driverXbox.getRawAxis(dYL))+(2*(self.driverXbox.getRawAxis(self.dXL))+(2*(self.driverXbox.getRawAxis(self.dXR)))
+    self.fL.set( (self.driverXbox.getRawAxis(2) ) + (2* ( self.driverXbox.getRawAxis(1)) ))
+    self.fR.set( (self.driverXbox.getRawAxis(2) ) - ( 2* (self.driverXbox.getRawAxis(1) )))
     
-    self.bR.set((self.driverXbox.getRawAxis(dYL))-(2*(self.driverXbox.getRawAxis(self.dXL))-(2*(self.driverXbox.getRawAxis(self.dXR)))
+    self.bL.set( (self.driverXbox.getRawAxis(2)) + ( 2* (self.driverXbox.getRawAxis(1))) +   ( 2* (self.driverXbox.getRawAxis(4))))
+    
+    self.bR.set( (self.driverXbox.getRawAxis(2) ) - (2* (self.driverXbox.getRawAxis(1))) -(2* (self.driverXbox.getRawAxis(4))))
     
 
 
